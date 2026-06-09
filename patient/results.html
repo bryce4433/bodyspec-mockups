@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Patient · Body composition results — Mochi × BodySpec</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=STIX+Two+Text:ital@1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/mochi.css" />
+    <style>
+      .trend-grid {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr;
+        gap: 14px;
+        align-items: start;
+      }
+      .mini-grid {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        gap: 14px;
+      }
+      .selectbox {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 14px;
+        border: 1px solid var(--border);
+        border-radius: var(--r-10);
+        background: var(--surface);
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--navy);
+        cursor: pointer;
+      }
+      .body-fig {
+        width: 46px;
+        height: 96px;
+      }
+      @media (max-width: 980px) {
+        .trend-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="logo">mochi<small>HEALTH</small></div>
+        <nav class="nav">
+          <a href="dashboard.html"
+            ><svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+            Home</a
+          >
+          <a href="#"
+            ><svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 9l1-5h16l1 5" />
+              <path d="M4 9v11a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9" />
+              <path d="M9 22V12h6v10" />
+            </svg>
+            Shop</a
+          >
+          <a class="active" href="results.html"
+            ><svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="9" />
+              <circle cx="12" cy="12" r="5" />
+              <circle cx="12" cy="12" r="1.4" fill="currentColor" />
+            </svg>
+            Progress Tracker</a
+          >
+          <a href="#"
+            ><svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"
+              />
+            </svg>
+            Messages <span class="badge">2</span></a
+          >
+          <a href="#"
+            ><svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M11 2a2 2 0 0 0-2 2v5H4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h5v5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-5h5a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-5V4a2 2 0 0 0-2-2z"
+              />
+            </svg>
+            Care</a
+          >
+          <a href="upcoming.html"
+            ><svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+            Visits</a
+          >
+          <a href="#"
+            ><svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="2" y="5" width="20" height="14" rx="2" />
+              <line x1="2" y1="10" x2="22" y2="10" />
+            </svg>
+            Billing</a
+          >
+        </nav>
+        <div class="profile-card">
+          <span class="avatar">SM</span>
+          <span class="meta"
+            ><b>Sarah Mitchell</b><span>sarah.mitchell@email.com</span></span
+          >
+        </div>
+        <div class="signout">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" y1="12" x2="9" y2="12" />
+          </svg>
+          Sign Out
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="main-inner">
+          <!-- header -->
+          <div class="flex between items-start wrap gap-16">
+            <div>
+              <h1 class="page-title">Body composition</h1>
+              <div class="source-pill" style="margin-top: 10px">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M21 12a9 9 0 1 1-2.6-6.4" />
+                  <polyline points="21 4 21 10 15 10" />
+                </svg>
+                Synced from BodySpec · DEXA scan, May 23, 2026
+              </div>
+            </div>
+            <div class="flex gap-8 wrap">
+              <span class="selectbox"
+                >Compare: May 23 vs Feb 21
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9" /></svg
+              ></span>
+              <a class="btn btn-primary" href="booking.html">Book next scan</a>
+            </div>
+          </div>
+
+          <!-- GLP-1 story callout -->
+          <div class="callout callout-ok" style="margin-top: 22px">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+            <div>
+              Since your baseline in November you've lost <b>30.2 lbs</b>, and
+              <b>86%</b> of it came from fat. Your lean (muscle) mass is largely
+              preserved, exactly what you want on a GLP-1.
+            </div>
+          </div>
+
+          <!-- comparison table (BodySpec style) -->
+          <div class="section-label">Latest scan vs previous</div>
+          <div class="tbl-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Measure time</th>
+                  <th>Fat %</th>
+                  <th>Total mass</th>
+                  <th>Fat mass</th>
+                  <th>Lean mass</th>
+                  <th>Bone mass</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight: 600">May 23, 2026 · 9:54am</td>
+                  <td class="num"><span class="t-down t-good">33.1%</span></td>
+                  <td class="num">
+                    <span class="t-down t-good">168.2 lbs</span>
+                  </td>
+                  <td class="num">
+                    <span class="t-down t-good">55.7 lbs</span>
+                  </td>
+                  <td class="num">
+                    <span class="t-down t-bad">106.6 lbs</span>
+                  </td>
+                  <td class="num">
+                    <span class="t-flat t-neutral">5.9 lbs</span>
+                  </td>
+                </tr>
+                <tr class="muted-row">
+                  <td>Feb 21, 2026 · 11:32am</td>
+                  <td class="num">37.4%</td>
+                  <td class="num">181.0 lbs</td>
+                  <td class="num">67.7 lbs</td>
+                  <td class="num">107.4 lbs</td>
+                  <td class="num">5.9 lbs</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- trends -->
+          <div class="section-label">Trends across your scans</div>
+          <div class="trend-grid">
+            <!-- hero: fat vs lean -->
+            <div class="chart-card">
+              <div class="card-title">Fat mass vs lean mass</div>
+              <div class="card-desc">
+                The GLP-1 goal: fat down, muscle held steady
+              </div>
+              <svg viewBox="0 0 640 260" width="100%" style="margin-top: 8px">
+                <!-- gridlines -->
+                <g stroke="#e6e9f0" stroke-width="1">
+                  <line x1="70" y1="30" x2="600" y2="30" />
+                  <line x1="70" y1="75" x2="600" y2="75" />
+                  <line x1="70" y1="120" x2="600" y2="120" />
+                  <line x1="70" y1="165" x2="600" y2="165" />
+                  <line x1="70" y1="210" x2="600" y2="210" />
+                </g>
+                <!-- y labels (right) -->
+                <g
+                  fill="#7e7f87"
+                  font-size="11"
+                  text-anchor="start"
+                  font-family="Instrument Sans"
+                >
+                  <text x="606" y="34">120</text>
+                  <text x="606" y="79">100</text>
+                  <text x="606" y="124">80</text>
+                  <text x="606" y="169">60</text>
+                  <text x="606" y="214">40</text>
+                </g>
+                <!-- lean mass line (purple, flat high) -->
+                <polyline
+                  fill="none"
+                  stroke="#3b3b8d"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  points="90,51 335,58 580,60"
+                />
+                <g fill="#3b3b8d">
+                  <circle cx="90" cy="51" r="5" />
+                  <circle cx="335" cy="58" r="5" />
+                  <circle cx="580" cy="60" r="5" />
+                </g>
+                <!-- fat mass line (pumpkin, descending) -->
+                <polyline
+                  fill="none"
+                  stroke="#f2853d"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  points="90,116 335,148 580,175"
+                />
+                <g fill="#f2853d">
+                  <circle cx="90" cy="116" r="5" />
+                  <circle cx="335" cy="148" r="5" />
+                  <circle cx="580" cy="175" r="5" />
+                </g>
+                <!-- value labels -->
+                <g
+                  font-size="11"
+                  font-weight="700"
+                  font-family="Instrument Sans"
+                >
+                  <text x="90" y="44" fill="#3b3b8d" text-anchor="middle">
+                    110.8
+                  </text>
+                  <text x="580" y="53" fill="#3b3b8d" text-anchor="middle">
+                    106.6
+                  </text>
+                  <text x="90" y="108" fill="#f2853d" text-anchor="middle">
+                    81.7
+                  </text>
+                  <text x="580" y="190" fill="#f2853d" text-anchor="middle">
+                    55.7
+                  </text>
+                </g>
+                <!-- x labels -->
+                <g
+                  fill="#7e7f87"
+                  font-size="12"
+                  text-anchor="middle"
+                  font-family="Instrument Sans"
+                >
+                  <text x="90" y="234">Nov '25</text>
+                  <text x="335" y="234">Feb '26</text>
+                  <text x="580" y="234">May '26</text>
+                </g>
+              </svg>
+              <div class="chart-legend">
+                <span class="key"
+                  ><span class="swatch" style="background: #3b3b8d"></span> Lean
+                  mass (lbs)</span
+                >
+                <span class="key"
+                  ><span class="swatch" style="background: #f2853d"></span> Fat
+                  mass (lbs)</span
+                >
+              </div>
+            </div>
+
+            <!-- two mini charts -->
+            <div class="mini-grid">
+              <div class="chart-card" style="padding: 18px 20px">
+                <div class="flex between items-center">
+                  <div class="card-title" style="font-size: 15px">
+                    Body fat %
+                  </div>
+                  <span class="tag tag-success">−8.1 pts</span>
+                </div>
+                <svg viewBox="0 0 300 170" width="100%" style="margin-top: 4px">
+                  <g stroke="#e6e9f0" stroke-width="1">
+                    <line x1="40" y1="25" x2="280" y2="25" />
+                    <line x1="40" y1="82" x2="280" y2="82" />
+                    <line x1="40" y1="140" x2="280" y2="140" />
+                  </g>
+                  <polyline
+                    fill="none"
+                    stroke="#3b3b8d"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    points="60,48 160,79 260,114"
+                  />
+                  <g fill="#3b3b8d">
+                    <circle cx="60" cy="48" r="4.5" />
+                    <circle cx="160" cy="79" r="4.5" />
+                    <circle cx="260" cy="114" r="4.5" />
+                  </g>
+                  <g
+                    font-size="11"
+                    font-weight="700"
+                    fill="#000045"
+                    font-family="Instrument Sans"
+                  >
+                    <text x="60" y="40" text-anchor="middle">41.2</text>
+                    <text x="260" y="129" text-anchor="middle">33.1</text>
+                  </g>
+                  <g
+                    fill="#7e7f87"
+                    font-size="10.5"
+                    text-anchor="middle"
+                    font-family="Instrument Sans"
+                  >
+                    <text x="60" y="158">Nov</text>
+                    <text x="160" y="158">Feb</text>
+                    <text x="260" y="158">May</text>
+                  </g>
+                </svg>
+              </div>
+              <div class="chart-card" style="padding: 18px 20px">
+                <div class="flex between items-center">
+                  <div class="card-title" style="font-size: 15px">
+                    Visceral fat
+                  </div>
+                  <span class="tag tag-success">−0.82 lbs</span>
+                </div>
+                <svg viewBox="0 0 300 170" width="100%" style="margin-top: 4px">
+                  <g stroke="#e6e9f0" stroke-width="1">
+                    <line x1="40" y1="25" x2="280" y2="25" />
+                    <line x1="40" y1="82" x2="280" y2="82" />
+                    <line x1="40" y1="140" x2="280" y2="140" />
+                  </g>
+                  <polyline
+                    fill="none"
+                    stroke="#29a66c"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    points="60,43 160,85 260,115"
+                  />
+                  <g fill="#29a66c">
+                    <circle cx="60" cy="43" r="4.5" />
+                    <circle cx="160" cy="85" r="4.5" />
+                    <circle cx="260" cy="115" r="4.5" />
+                  </g>
+                  <g
+                    font-size="11"
+                    font-weight="700"
+                    fill="#000045"
+                    font-family="Instrument Sans"
+                  >
+                    <text x="60" y="35" text-anchor="middle">2.10</text>
+                    <text x="260" y="130" text-anchor="middle">1.28</text>
+                  </g>
+                  <g
+                    fill="#7e7f87"
+                    font-size="10.5"
+                    text-anchor="middle"
+                    font-family="Instrument Sans"
+                  >
+                    <text x="60" y="158">Nov</text>
+                    <text x="160" y="158">Feb</text>
+                    <text x="260" y="158">May</text>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- BodySpec metric grid (recreated) -->
+          <div class="section-label">Full report</div>
+          <div class="results-section">
+            <div class="metric-grid">
+              <!-- scan image -->
+              <div class="metric-card">
+                <div class="metric-name">Scan image</div>
+                <div
+                  class="scan-frame"
+                  style="
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 8px;
+                  "
+                >
+                  <svg viewBox="0 0 120 150" width="92" height="115">
+                    <defs>
+                      <radialGradient id="glow" cx="50%" cy="38%" r="60%">
+                        <stop offset="0%" stop-color="#3a2a5e" />
+                        <stop offset="100%" stop-color="#0b0b1a" />
+                      </radialGradient>
+                      <linearGradient id="heat" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#ffd28a" />
+                        <stop offset="40%" stop-color="#f2853d" />
+                        <stop offset="70%" stop-color="#e5564b" />
+                        <stop offset="100%" stop-color="#6d6cc4" />
+                      </linearGradient>
+                    </defs>
+                    <rect width="120" height="150" fill="url(#glow)" />
+                    <!-- body heat silhouette -->
+                    <g fill="url(#heat)" opacity="0.92">
+                      <circle cx="60" cy="24" r="11" />
+                      <path
+                        d="M48 36 h24 l6 30 q2 8 -3 9 l-6 1 v34 h-6 v-30 h-6 v30 h-6 v-34 l-6 -1 q-5 -1 -3 -9 z"
+                      />
+                      <rect
+                        x="30"
+                        y="40"
+                        width="7"
+                        height="40"
+                        rx="3.5"
+                        transform="rotate(8 33 60)"
+                      />
+                      <rect
+                        x="83"
+                        y="40"
+                        width="7"
+                        height="40"
+                        rx="3.5"
+                        transform="rotate(-8 86 60)"
+                      />
+                    </g>
+                    <!-- skeletal overlay -->
+                    <g
+                      stroke="#fff"
+                      stroke-opacity="0.5"
+                      stroke-width="1"
+                      fill="none"
+                    >
+                      <line x1="60" y1="40" x2="60" y2="92" />
+                      <path
+                        d="M52 50 q8 4 16 0 M51 58 q9 5 18 0 M52 66 q8 4 16 0"
+                      />
+                    </g>
+                  </svg>
+                </div>
+                <div class="scan-caption">DEXA · 05/23/26</div>
+              </div>
+
+              <!-- body fat % -->
+              <div class="metric-card">
+                <div class="metric-name">Body fat %</div>
+                <div class="metric-readout">
+                  <span class="metric-old">37.4</span>
+                  <span class="metric-arrow t-good">↓</span>
+                  <span class="metric-new">33.1</span
+                  ><span class="metric-unit">%</span>
+                </div>
+                <div class="metric-dates">
+                  <span class="d-old">02/21/26</span><span>05/23/26</span>
+                </div>
+                <div class="metric-context">
+                  <b>42%</b> of people have higher body fat % than you
+                </div>
+                <div class="pbar">
+                  <span class="marker" style="left: 50%"></span>
+                </div>
+              </div>
+
+              <!-- visceral fat -->
+              <div class="metric-card">
+                <div class="metric-name">Visceral fat</div>
+                <div class="metric-readout">
+                  <span class="metric-old">1.62</span>
+                  <span class="metric-arrow t-good">↓</span>
+                  <span class="metric-new">1.28</span
+                  ><span class="metric-unit">lbs</span>
+                </div>
+                <div class="metric-dates">
+                  <span class="d-old">02/21/26</span><span>05/23/26</span>
+                </div>
+                <div class="metric-context">
+                  You're in the lowest <b>35%</b> of people for visceral fat
+                </div>
+                <div class="pbar">
+                  <span class="marker" style="left: 28%"></span>
+                </div>
+              </div>
+
+              <!-- lean mass -->
+              <div class="metric-card">
+                <div class="metric-name">Lean mass index</div>
+                <div class="metric-readout">
+                  <span class="metric-old">16.8</span>
+                  <span class="metric-arrow t-neutral">→</span>
+                  <span class="metric-new">16.7</span
+                  ><span class="metric-unit">kg/m<sup>2</sup></span>
+                </div>
+                <div class="metric-dates">
+                  <span class="d-old">02/21/26</span><span>05/23/26</span>
+                </div>
+                <div class="metric-context">
+                  You're in the <b>56th</b> percentile for avg lean mass
+                </div>
+                <div class="pbar pbar--rev">
+                  <span class="marker" style="left: 56%"></span>
+                </div>
+              </div>
+
+              <!-- bone density -->
+              <div class="metric-card">
+                <div class="metric-name">Bone density</div>
+                <div class="metric-readout">
+                  <span class="metric-old">1.12</span>
+                  <span class="metric-arrow t-neutral">→</span>
+                  <span class="metric-new">1.11</span
+                  ><span class="metric-unit">g/cm<sup>2</sup></span>
+                </div>
+                <div class="metric-dates">
+                  <span class="d-old">02/21/26</span><span>05/23/26</span>
+                </div>
+                <div class="metric-context">
+                  Your bone density is in the <b>healthy</b> range
+                </div>
+                <div class="pbar pbar--rev">
+                  <span class="marker" style="left: 64%"></span>
+                </div>
+              </div>
+
+              <!-- regional comp -->
+              <div class="metric-card">
+                <div class="metric-name">Regional comp</div>
+                <div
+                  style="
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 6px;
+                    padding: 6px 0;
+                  "
+                >
+                  <!-- arms highlighted -->
+                  <svg class="body-fig" viewBox="0 0 46 96">
+                    <g fill="#e7e9f0">
+                      <circle cx="23" cy="11" r="8" />
+                      <rect x="15" y="20" width="16" height="34" rx="6" />
+                      <rect x="17" y="52" width="5" height="34" rx="2.5" />
+                      <rect x="24" y="52" width="5" height="34" rx="2.5" />
+                    </g>
+                    <g fill="#66cc9d">
+                      <rect
+                        x="6"
+                        y="22"
+                        width="6"
+                        height="32"
+                        rx="3"
+                        transform="rotate(6 9 38)"
+                      />
+                      <rect
+                        x="34"
+                        y="22"
+                        width="6"
+                        height="32"
+                        rx="3"
+                        transform="rotate(-6 37 38)"
+                      />
+                    </g>
+                  </svg>
+                  <!-- trunk highlighted -->
+                  <svg class="body-fig" viewBox="0 0 46 96">
+                    <g fill="#e7e9f0">
+                      <circle cx="23" cy="11" r="8" />
+                      <rect
+                        x="6"
+                        y="22"
+                        width="6"
+                        height="32"
+                        rx="3"
+                        transform="rotate(6 9 38)"
+                      />
+                      <rect
+                        x="34"
+                        y="22"
+                        width="6"
+                        height="32"
+                        rx="3"
+                        transform="rotate(-6 37 38)"
+                      />
+                      <rect x="17" y="52" width="5" height="34" rx="2.5" />
+                      <rect x="24" y="52" width="5" height="34" rx="2.5" />
+                    </g>
+                    <g fill="#80b3ff">
+                      <rect x="15" y="20" width="16" height="34" rx="6" />
+                    </g>
+                  </svg>
+                  <!-- legs highlighted -->
+                  <svg class="body-fig" viewBox="0 0 46 96">
+                    <g fill="#e7e9f0">
+                      <circle cx="23" cy="11" r="8" />
+                      <rect x="15" y="20" width="16" height="34" rx="6" />
+                      <rect
+                        x="6"
+                        y="22"
+                        width="6"
+                        height="32"
+                        rx="3"
+                        transform="rotate(6 9 38)"
+                      />
+                      <rect
+                        x="34"
+                        y="22"
+                        width="6"
+                        height="32"
+                        rx="3"
+                        transform="rotate(-6 37 38)"
+                      />
+                    </g>
+                    <g fill="#9a8cff">
+                      <rect x="17" y="52" width="5" height="34" rx="2.5" />
+                      <rect x="24" y="52" width="5" height="34" rx="2.5" />
+                    </g>
+                  </svg>
+                </div>
+                <div class="metric-context" style="padding-top: 8px">
+                  Lean mass is balanced across arms, trunk and legs
+                </div>
+              </div>
+
+              <!-- resting metabolic -->
+              <div class="metric-card">
+                <div class="metric-name">Resting metabolic</div>
+                <div class="metric-readout">
+                  <span class="metric-old">1465</span>
+                  <span class="metric-arrow t-neutral">→</span>
+                  <span class="metric-new">1440</span
+                  ><span class="metric-unit">cal</span>
+                </div>
+                <div class="metric-dates">
+                  <span class="d-old">02/21/26</span><span>05/23/26</span>
+                </div>
+                <div class="metric-context">
+                  RMR is a tool to understand your metabolism. There's no "good"
+                  or "bad" RMR.
+                </div>
+              </div>
+
+              <!-- limb lean mass -->
+              <div class="metric-card">
+                <div class="metric-name">Limb lean mass</div>
+                <div class="metric-readout">
+                  <span class="metric-old">7.9</span>
+                  <span class="metric-arrow t-neutral">→</span>
+                  <span class="metric-new">7.8</span
+                  ><span class="metric-unit">kg/m<sup>2</sup></span>
+                </div>
+                <div class="metric-dates">
+                  <span class="d-old">02/21/26</span><span>05/23/26</span>
+                </div>
+                <div class="metric-context">
+                  You're in the <b>60th</b> percentile for avg limb lean
+                </div>
+                <div class="pbar pbar--rev">
+                  <span class="marker" style="left: 60%"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex between items-center" style="margin-top: 24px">
+            <a class="btn btn-tertiary" href="history.html"
+              >View scan history</a
+            >
+            <span class="muted" style="font-size: 13px"
+              >Reviewed by your care team on May 24, 2026</span
+            >
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
