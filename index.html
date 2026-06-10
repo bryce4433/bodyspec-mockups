@@ -14,28 +14,17 @@
   </head>
   <body>
     <div class="hub">
-      <div class="eyebrow">Internal stakeholder review · design mockup</div>
-      <h1 class="page-title" style="font-size: 34px; margin-top: 8px">
+      <h1 class="page-title" style="font-size: 34px">
         Mochi <span class="serif" style="font-size: 30px">×</span> BodySpec
       </h1>
-      <p class="page-sub" style="font-size: 16px; max-width: 620px">
-        Concept mockups for booking and reviewing clinical-grade DEXA
-        body-composition scans inside the Mochi portal. Results sync back
-        automatically so the care team can track fat loss while preserving lean
-        mass on GLP-1 therapy. Static HTML, sample data, no live API.
-      </p>
 
-      <div class="hub-grid">
+      <div class="hub-grid" style="margin-top: 24px">
         <!-- Patient -->
         <div class="hub-card">
           <div class="tag tag-brand" style="margin-bottom: 10px">
             Patient portal
           </div>
           <h3>What the patient sees</h3>
-          <p>
-            The DEXA entry point on the patient dashboard, and the
-            body-composition results dashboard once scans sync back.
-          </p>
           <ul class="hub-list">
             <li>
               <a href="patient/dashboard.html"
@@ -57,31 +46,15 @@
             Provider portal
           </div>
           <h3>What the care team sees</h3>
-          <p>
-            A new Body Composition tab inside the patient chart: latest DEXA
-            summary near weight and labs, lean-mass flagging, trends, and the
-            order/acknowledge workflow.
-          </p>
           <ul class="hub-list">
             <li>
               <a href="provider/chart.html"
-                >Patient chart · Body Composition tab
-                <span class="chev">→</span></a
+                >Patient chart · Body composition <span class="chev">→</span></a
               >
             </li>
           </ul>
-          <p style="margin-top: 16px; font-size: 13px" class="muted">
-            Sample patient: a 42-year-old on tirzepatide, 3 DEXA scans over ~6
-            months showing ~30 lbs lost with lean mass largely preserved.
-          </p>
         </div>
       </div>
-
-      <p style="margin-top: 32px; font-size: 13px" class="muted">
-        Built with the real Mochi design tokens (Instrument Sans, navy #000045,
-        the 8px spacing scale). BodySpec data and the sync are stubbed for the
-        mockup.
-      </p>
     </div>
   </body>
 </html>
