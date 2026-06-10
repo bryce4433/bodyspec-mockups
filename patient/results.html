@@ -260,7 +260,39 @@
 
           <!-- comparison table (BodySpec style) -->
           <div class="section-label">Latest scan vs previous</div>
-          <div class="tbl-wrap">
+          <!-- mobile: transposed (metric rows, scan columns) -->
+          <div class="cmp-mobile">
+            <div class="cmp-row cmp-head">
+              <span>Measure</span><span>May 23</span><span>Feb 21</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">Fat %</span>
+              <span class="cmp-now t-down t-good">33.1%</span>
+              <span class="cmp-prev">37.4%</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">Total mass</span>
+              <span class="cmp-now t-down t-good">168.2</span>
+              <span class="cmp-prev">181.0</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">Fat mass</span>
+              <span class="cmp-now t-down t-good">55.7</span>
+              <span class="cmp-prev">67.7</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">Lean mass</span>
+              <span class="cmp-now t-down t-bad">106.6</span>
+              <span class="cmp-prev">107.4</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">Bone mass</span>
+              <span class="cmp-now t-flat t-neutral">5.9</span>
+              <span class="cmp-prev">5.9</span>
+            </div>
+          </div>
+          <!-- desktop: BodySpec-style (scan rows) -->
+          <div class="tbl-wrap cmp-desktop">
             <table class="data-table">
               <thead>
                 <tr>
